@@ -84,11 +84,12 @@ const App = () => {
     },
     {
       path: '/ListarReservasFeitas',
-      element: 
+      element: (
         <>
           <TopBarComp />
           <ListarReservasFeitas />
         </>
+      ),
     },
     {
       path: '/*',
