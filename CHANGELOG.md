@@ -13,6 +13,8 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 
 - Bloco de CSS comentado removido do index.css
 - UserContext não utilizado removido do Login.jsx
+- TopBarComp.jsx duplicado removido, substituído pelo TopBar.jsx existente
+- Pasta empty removida
 
 ## [0.1.0] - 2026-06-10
 
