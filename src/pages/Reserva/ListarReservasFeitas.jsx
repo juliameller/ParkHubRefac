@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useReservaContext } from "../../context/ReservaContext";
+import React, { useState, useEffect } from 'react';
+import { useReservaContext } from '../../context/ReservaContext';
+import { STORAGE_KEYS, BASE_DATE_FOR_TIME_CALC } from '../../constants';
 
 const ListarReservasFeitas = ({ reservas, ...props }) => {
   const [vagaSelecionada, setVagaSelecionada] = useState(null);
@@ -11,15 +12,19 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
   };
 
   useEffect(() => {
-    const storedVaga = localStorage.getItem("vagaSelecionada");
+    const storedVaga = localStorage.getItem(STORAGE_KEYS.SELECTED_PARKING);
     if (storedVaga) {
       setVagaSelecionada(JSON.parse(storedVaga));
     }
   }, []);
 
   const calcularValorTotal = (horaEntrada, novaHoraSaida) => {
-    const horaEntradaDate = new Date(`2023-01-01T${horaEntrada}`);
-    const horaSaidaDate = new Date(`2023-01-01T${novaHoraSaida}`);
+    const horaEntradaDate = new Date(
+      `${BASE_DATE_FOR_TIME_CALC}${horaEntrada}`
+    );
+    const horaSaidaDate = new Date(
+      `${BASE_DATE_FOR_TIME_CALC}${novaHoraSaida}`
+    );
 
     const diferencaEmMilissegundos = horaSaidaDate - horaEntradaDate;
 
@@ -27,9 +32,9 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
 
     const valorTotal = diferencaEmHoras * parseFloat(vagaSelecionada.valorhora);
 
-    const valorTotalFormatado = new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
+    const valorTotalFormatado = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
     }).format(valorTotal);
 
     return valorTotalFormatado;
@@ -57,20 +62,20 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
   return (
     <div
       style={{
-        marginLeft: "10px",
-        marginTop: "10px",
-        width: "350px",
-        alignItems: "center",
+        marginLeft: '10px',
+        marginTop: '10px',
+        width: '350px',
+        alignItems: 'center',
       }}
     >
-      <h2 className="text-2xl font-bold mb-4" style={{ textAlign: "center" }}>
+      <h2 className="text-2xl font-bold mb-4" style={{ textAlign: 'center' }}>
         Reservas Feitas:
       </h2>
       {listarReservas.map((reserva) => (
         <div
           key={reserva.id}
           className="mb-6 p-4 border border-gray-300 rounded"
-          style={{ WebkitBoxShadow: "0px 0px 5px 0px var(--azulclaroapp)" }}
+          style={{ WebkitBoxShadow: '0px 0px 5px 0px var(--azulclaroapp)' }}
         >
           <p className="mb-2 block text-base font-medium">
             Nome do Cliente: {reserva.nome}
@@ -85,7 +90,7 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
             Hora de Entrada: {reserva.horaEntrada}
           </p>
           <p className="mb-2 block text-base font-medium">
-            Hora de Saída:{" "}
+            Hora de Saída:{' '}
             {edicao === reserva.id ? (
               <input
                 className="mb-2 text-base font-medium"
@@ -109,7 +114,7 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
           <button
             className="bg-[#0335fc] hover:bg-green-700 mx-4 text-white py-2 px-4 rounded mt-4"
             onClick={() => handleEditar(reserva.id)}
-            style={{ marginLeft: "100px" }}
+            style={{ marginLeft: '100px' }}
           >
             Editar
           </button>
