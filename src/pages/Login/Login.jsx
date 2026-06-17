@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logoSVGneon from '../../assets/teste.svg';
 
@@ -7,7 +7,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loginType, setLoginType] = useState('user');
   const navigate = useNavigate();
-
 
   const containerStyle = {
     margin: '10px',
@@ -20,7 +19,8 @@ const Login = () => {
     minHeight: '98vh',
     borderRadius: '20px',
     boxShadow: '0px 0px 7px 1px var(--azulclaroapp)',
-    background: 'linear-gradient(to right, var(--azulclaroapp), var(--azulescuroapp))'
+    background:
+      'linear-gradient(to right, var(--azulclaroapp), var(--azulescuroapp))',
   };
 
   const parkhubStyle = {
@@ -95,18 +95,23 @@ const Login = () => {
       if (loginType === 'user') {
         navigate(`/vagas/${username}`);
       } else if (loginType === 'company') {
-        navigate('/ListarReservasFeitas'); 
+        navigate('/ListarReservasFeitas');
       }
     }
   }
 
   return (
     <div style={containerStyle}>
-      <UserContext.Provider value={{ username, loginType }}>
       <img width="150" height="150" src={logoSVGneon} />
       <span style={parkhubStyle}>ParkHub</span>
-      <div style={{ backgroundColor: 'transparent', borderRadius: '10px', padding: '6px' }}>
-        <p style={{textAlign:'center'}}>Método de Entrada</p>
+      <div
+        style={{
+          backgroundColor: 'transparent',
+          borderRadius: '10px',
+          padding: '6px',
+        }}
+      >
+        <p style={{ textAlign: 'center' }}>Método de Entrada</p>
         <label style={labelStyle}>
           <select
             value={loginType}
@@ -127,7 +132,8 @@ const Login = () => {
           style={formInputStyle}
         />
         <br />
-        <input type="password"
+        <input
+          type="password"
           placeholder="Senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -140,18 +146,21 @@ const Login = () => {
         />
         <div>
           <p style={cadastroStyle}>
-            Sem cadastro? <Link to="/register" style={{ color: 'Highlight', textDecoration: 0, }}>Cadastrar-se</Link>
+            Sem cadastro?{' '}
+            <Link
+              to="/register"
+              style={{ color: 'Highlight', textDecoration: 0 }}
+            >
+              Cadastrar-se
+            </Link>
           </p>
           <button type="button" onClick={handleLogin} style={buttonStyle}>
             Entrar
           </button>
         </div>
       </form>
-      </UserContext.Provider>
     </div>
   );
 };
 
 export default Login;
-
-export const UserContext = React.createContext();

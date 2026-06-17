@@ -12,6 +12,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 ### Removed
 
 - Bloco de CSS comentado removido do index.css
+- UserContext não utilizado removido do Login.jsx
 
 ## [0.1.0] - 2026-06-10
 
