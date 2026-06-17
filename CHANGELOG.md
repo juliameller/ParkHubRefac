@@ -20,6 +20,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 
 - Magic strings e numbers substituídos por constantes em ReservaForm.jsx
 - Magic strings e numbers substituídos por constantes em ListarReservasFeitas.jsx
+- Rotas substituídas por constantes no App.jsx
 
 ## [0.1.0] - 2026-06-10
 

@@ -13,6 +13,7 @@ import ReservaEstacionamento from './pages/Reserva/ReservaEstacionamento';
 import ListarReservasFeitas from './pages/Reserva/ListarReservasFeitas';
 import { ReservaProvider } from './context/ReservaContext';
 import ProfilePage from './pages/profile/Profile';
+import { ROUTES } from './constants';
 
 const App = () => {
   const [userData, setUserData] = React.useState(() => {
@@ -32,7 +33,7 @@ const App = () => {
 
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: ROUTES.HOME,
       element: (
         <>
           <TopBarLanding />
@@ -41,21 +42,21 @@ const App = () => {
       ),
     },
     {
-      path: '/login',
+      path: ROUTES.LOGIN,
       element: <Login />,
     },
     {
-      path: '/register',
+      path: ROUTES.REGISTER,
       element: <RegisterPage onRegister={handleRegister} />,
     },
     {
-      path: '/profile',
+      path: ROUTES.PROFILE,
       element: (
         <ProfilePage userData={userData} onDeleteData={handleDeleteData} />
       ),
     },
     {
-      path: '/vagas/:username',
+      path: ROUTES.PARKING_LOTS,
       element: (
         <>
           <TopBar />
@@ -64,7 +65,7 @@ const App = () => {
       ),
     },
     {
-      path: '/estacionamentos',
+      path: ROUTES.ESTACIONAMENTOS,
       element: (
         <>
           <TopBarLanding />
@@ -73,7 +74,7 @@ const App = () => {
       ),
     },
     {
-      path: '/ReservaEstacionamento',
+      path: ROUTES.RESERVA,
       element: (
         <>
           <TopBar />
@@ -82,7 +83,7 @@ const App = () => {
       ),
     },
     {
-      path: '/ListarReservasFeitas',
+      path: ROUTES.LISTAR_RESERVAS,
       element: (
         <>
           <TopBar />
