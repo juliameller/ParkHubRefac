@@ -16,6 +16,10 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 - TopBarComp.jsx duplicado removido, substituído pelo TopBar.jsx existente
 - Pasta empty removida
 
+### Changed
+
+- Magic strings e numbers substituídos por constantes em ReservaForm.jsx
+
 ## [0.1.0] - 2026-06-10
 
 ### Added
