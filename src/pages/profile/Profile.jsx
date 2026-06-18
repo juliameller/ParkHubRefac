@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { STORAGE_KEYS } from '../../constants';
 
 function ProfilePage({ userData, onDeleteData }) {
   const [editing, setEditing] = useState(false);
@@ -17,9 +18,9 @@ function ProfilePage({ userData, onDeleteData }) {
       [name]: value,
     }));
   };
-  
+
   const handleSaveChanges = () => {
-    localStorage.setItem('userData', JSON.stringify(editedData));
+    localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(editedData));
     setEditing(false);
     userData(editedData);
   };
@@ -32,7 +33,7 @@ function ProfilePage({ userData, onDeleteData }) {
 
   const containerStyle = {
     margin: '10px',
-    textAlign:'center',
+    textAlign: 'center',
 
     flexDirection: 'column',
     padding: '20px',
@@ -54,13 +55,16 @@ function ProfilePage({ userData, onDeleteData }) {
     boxShadow: '0px 0px 7px 1px rgba(0, 111, 255, 1)',
     backgroundColor: 'transparent',
   };
-  
+
   return (
     <div style={containerStyle}>
-      <h1 style={{
+      <h1
+        style={{
           fontSize: '30px',
           color: 'white',
-        }}>Perfil
+        }}
+      >
+        Perfil
       </h1>
       {editing ? (
         <div>
@@ -87,15 +91,14 @@ function ProfilePage({ userData, onDeleteData }) {
           <label>
             CPF:
             <input
-             style={formInputStyle}
+              style={formInputStyle}
               type="text"
               name="CPF"
               value={editedData.CPF}
               onChange={handleInputChange}
             />
           </label>
-          <label
-            >
+          <label>
             E-mail:
             <input
               style={formInputStyle}
@@ -104,8 +107,13 @@ function ProfilePage({ userData, onDeleteData }) {
               value={editedData.email}
               onChange={handleInputChange}
             />
-          </label> 
-          <button className="bg-[#006DFF] rounded-lg hover:bg-green-700 mx-4 text-white py-2 px-4 rounded mt-4" onClick={handleSaveChanges}>Salvar Alterações</button>
+          </label>
+          <button
+            className="bg-[#006DFF] rounded-lg hover:bg-green-700 mx-4 text-white py-2 px-4 rounded mt-4"
+            onClick={handleSaveChanges}
+          >
+            Salvar Alterações
+          </button>
         </div>
       ) : (
         <div>
@@ -117,10 +125,18 @@ function ProfilePage({ userData, onDeleteData }) {
         </div>
       )}
       <div>
-      <button className="bg-[#006DFF] rounded-lg hover:bg-red-700 mx-4 text-white py-2 px-4 rounded mt-4" onClick={handleDeleteAndNavigate}>Excluir Dados</button>
-      <button className="bg-[#006DFF] rounded-lg hover:bg-gray-700 mx-4 text-white py-2 px-4 rounded mt-4" onClick={handleEditToggle}>
-        {editing ? 'Cancelar' : 'Editar'}
-      </button>
+        <button
+          className="bg-[#006DFF] rounded-lg hover:bg-red-700 mx-4 text-white py-2 px-4 rounded mt-4"
+          onClick={handleDeleteAndNavigate}
+        >
+          Excluir Dados
+        </button>
+        <button
+          className="bg-[#006DFF] rounded-lg hover:bg-gray-700 mx-4 text-white py-2 px-4 rounded mt-4"
+          onClick={handleEditToggle}
+        >
+          {editing ? 'Cancelar' : 'Editar'}
+        </button>
       </div>
     </div>
   );

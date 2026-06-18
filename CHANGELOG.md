@@ -23,6 +23,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 - Rotas substituídas por constantes no App.jsx
 - Magic strings substituídas por constantes no Estacionamentos.jsx
 - Magic strings substituídas por constantes no App.jsx
+- Magic strings substituídas por constantes no Profile.jsx
 
 ## [0.1.0] - 2026-06-10
 
