@@ -13,21 +13,21 @@ import ReservaEstacionamento from './pages/Reserva/ReservaEstacionamento';
 import ListarReservasFeitas from './pages/Reserva/ListarReservasFeitas';
 import { ReservaProvider } from './context/ReservaContext';
 import ProfilePage from './pages/profile/Profile';
-import { ROUTES } from './constants';
+import { ROUTES, STORAGE_KEYS } from './constants';
 
 const App = () => {
   const [userData, setUserData] = React.useState(() => {
-    const storedUserData = localStorage.getItem('userData');
+    const storedUserData = localStorage.getItem(STORAGE_KEYS.USER_DATA);
     return storedUserData ? JSON.parse(storedUserData) : null;
   });
 
   const handleRegister = (data) => {
-    localStorage.setItem('userData', JSON.stringify(data));
+    localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(data));
     setUserData(data);
   };
 
   const handleDeleteData = () => {
-    localStorage.removeItem('userData');
+    localStorage.removeItem(STORAGE_KEYS.USER_DATA);
     setUserData(null);
   };
 
