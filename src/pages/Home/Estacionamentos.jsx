@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import { STORAGE_KEYS } from '../../constants';
 
 export default function DetalheVaga() {
-  const [items] = useState(vagasData);
+  const [parkingLots] = useState(vagasData);
 
   const browserSpecificStyles = {
     WebkitBoxShadow: '0px 0px 7px 1px rgba(0, 111, 255, 1)',
@@ -52,7 +52,7 @@ export default function DetalheVaga() {
       >
         Estacionamentos Disponiveis
       </h1>
-      {items.map((vaga) => (
+      {parkingLots.map((vaga) => (
         <Card key={vaga.id} sx={cardStyle}>
           <CardContent>
             <h2>{vaga.estabelecimento}</h2>

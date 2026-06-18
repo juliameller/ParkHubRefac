@@ -27,6 +27,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 - Magic strings substituídas por constantes no Profile.jsx
 - calcularValorTotal removida de ReservaForm.jsx e ListarReservasFeitas.jsx, agora importada de reservationUtils.js
 - Função handleregister renomeada para handleRegister no RegisterPage.jsx
+- Varíavel items renomeada para parkingLots no Estacionamentos.jsx
 
 ## [0.1.0] - 2026-06-10
 
