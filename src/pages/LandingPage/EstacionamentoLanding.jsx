@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import vagasData from "../Home/Empresas.json";
 import Card from "@mui/material/Card";
@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 
 export default function DetalheVagaLanding() {
-  const [items] = useState(vagasData);
+  const [parkingLots] = useState(vagasData);
 
   const browserSpecificStyles = {
     WebkitBoxShadow: "0px 0px 7px 1px rgba(0, 111, 255, 1)",
@@ -70,9 +70,9 @@ export default function DetalheVagaLanding() {
         Estacionamentos Parceiros
       </h1>
       <div style={{ ...cardContainerStyle }}>
-        {items.map((vaga) => (
-          <div style={{ margin: "1px" }}>
-            <Card key={vaga.id} sx={cardStyle}>
+        {parkingLots.map((vaga) => (
+          <div key={vaga.id} style={{ margin: "1px" }}>
+            <Card  sx={cardStyle}>
               <CardContent>
                 <h2 style={h2Style}>{vaga.estabelecimento}</h2>
                 <div style={divStyle}>{vaga.localizacao}</div>
