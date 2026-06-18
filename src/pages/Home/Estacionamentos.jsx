@@ -1,52 +1,53 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import vagasData from "./Empresas.json";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import vagasData from './Empresas.json';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import { STORAGE_KEYS } from '../../constants';
 
 export default function DetalheVaga() {
   const [items] = useState(vagasData);
 
   const browserSpecificStyles = {
-    WebkitBoxShadow: "0px 0px 7px 1px rgba(0, 111, 255, 1)",
-    MozBoxShadow: "0px 0px 7px 1px rgba(0, 111, 255, 1)",
-    color: "white",
+    WebkitBoxShadow: '0px 0px 7px 1px rgba(0, 111, 255, 1)',
+    MozBoxShadow: '0px 0px 7px 1px rgba(0, 111, 255, 1)',
+    color: 'white',
   };
 
   const buttonneonstyles = {
-    WebkitBoxShadow: "0px 0px 5px 0px var(--azulclaroapp)",
-    backgroundColor: "var(--pretopuro)",
-    color: "var(--brancopuro)",
-    borderRadius: "8px",
+    WebkitBoxShadow: '0px 0px 5px 0px var(--azulclaroapp)',
+    backgroundColor: 'var(--pretopuro)',
+    color: 'var(--brancopuro)',
+    borderRadius: '8px',
   };
 
   const cardStyle = {
-    borderRadius: "30px",
+    borderRadius: '30px',
     maxWidth: 500,
-    margin: "auto",
+    margin: 'auto',
     marginBottom: 2,
     ...browserSpecificStyles,
     background:
-      "linear-gradient(to right, var(--azulclaroapp), var(--azulescuroapp))",
+      'linear-gradient(to right, var(--azulclaroapp), var(--azulescuroapp))',
   };
 
   const handleReservarClick = (vaga) => {
-    localStorage.setItem("vagaSelecionada", JSON.stringify(vaga));
+    localStorage.setItem(STORAGE_KEYS.SELECTED_PARKING, JSON.stringify(vaga));
   };
 
   return (
     <div>
       <h1
         style={{
-          color: "var(--azulescuroapp)",
+          color: 'var(--azulescuroapp)',
           maxWidth: 500,
-          margin: "auto",
+          margin: 'auto',
           marginBottom: 10,
-          borderRadius: "10px",
-          textAlign: "center",
-          fontSize: "30px",
-          fontWeight: "bold",
+          borderRadius: '10px',
+          textAlign: 'center',
+          fontSize: '30px',
+          fontWeight: 'bold',
         }}
       >
         Estacionamentos Disponiveis
@@ -61,27 +62,27 @@ export default function DetalheVaga() {
             <p>Quantidade de vagas: {vaga.vagasdisponiveis}</p>
             <div
               style={{
-                marginTop: "10px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+                marginTop: '10px',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
               }}
             >
               <div
                 style={{
-                  backgroundColor: "White",
-                  borderRadius: "10px",
-                  padding: "5px",
-                  alignItems: "center",
-                  textAlign: "center",
-                  fontWeight: "bold",
+                  backgroundColor: 'White',
+                  borderRadius: '10px',
+                  padding: '5px',
+                  alignItems: 'center',
+                  textAlign: 'center',
+                  fontWeight: 'bold',
                 }}
               >
-                <p style={{ color: "var(--azulclaroapp)" }}>
+                <p style={{ color: 'var(--azulclaroapp)' }}>
                   R${vaga.valorhora}/Hr
                 </p>
               </div>
-              <Link to={"/ReservaEstacionamento"}>
+              <Link to={'/ReservaEstacionamento'}>
                 <Button
                   style={buttonneonstyles}
                   variant="contained"
