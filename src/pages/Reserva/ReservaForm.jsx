@@ -1,11 +1,11 @@
-import React, { useReducer, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useReservaContext } from '../../context/ReservaContext';
 import { STORAGE_KEYS } from '../../constants';
 import { calcularValorTotal } from '../../utils/reservationUtils';
 
 const ReservaForm = ({ reserva, onChange }) => {
-  const [vagaSelecionada, setVagaSelecionada] = useState(null);
+  const [selectedParking, setSelectedParking] = useState(null);
   const [vagasDisponiveis, setVagasDisponiveis] = useState(0);
 
   const { adicionarReserva } = useReservaContext();
@@ -17,7 +17,7 @@ const ReservaForm = ({ reserva, onChange }) => {
     const storedVaga = localStorage.getItem(STORAGE_KEYS.SELECTED_PARKING);
     if (storedVaga) {
       const parsedVaga = JSON.parse(storedVaga);
-      setVagaSelecionada(parsedVaga);
+      setSelectedParking(parsedVaga);
       setVagasDisponiveis(parsedVaga.vagasdisponiveis);
     }
   }, []);
@@ -32,7 +32,7 @@ const ReservaForm = ({ reserva, onChange }) => {
     const valorFormatado = calcularValorTotal(
       reserva.horaEntrada,
       reserva.horaSaida,
-      vagaSelecionada.valorhora
+      selectedParking.valorhora
     );
     onChange('valorTotal', valorFormatado);
   };
@@ -68,13 +68,13 @@ const ReservaForm = ({ reserva, onChange }) => {
             <p className="mb-3 text-xl font-bold">
               Reservas disponíveis: {vagasDisponiveis} reservas
             </p>
-            {vagaSelecionada ? (
+            {selectedParking ? (
               <div>
-                <h2>{vagaSelecionada.estabelecimento}</h2>
-                <p>Localização: {vagaSelecionada.localizacao}</p>
-                <p>Horário de Funcionamento: {vagaSelecionada.horario}</p>
-                <p>Contato: {vagaSelecionada.contato}</p>
-                <p>Valor por Hora: R${vagaSelecionada.valorhora}/Hr</p>
+                <h2>{selectedParking.estabelecimento}</h2>
+                <p>Localização: {selectedParking.localizacao}</p>
+                <p>Horário de Funcionamento: {selectedParking.horario}</p>
+                <p>Contato: {selectedParking.contato}</p>
+                <p>Valor por Hora: R${selectedParking.valorhora}/Hr</p>
               </div>
             ) : (
               <p>Nenhuma vaga selecionada</p>

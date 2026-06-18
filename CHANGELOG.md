@@ -31,6 +31,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 - Varíavel items renomeada para parkingLots no EstacionamentoLanding.jsx
 - Parâmetros campo e valor renomeados para field e value no 
 ReservaEstacionamento.jsx
+- Renomear vagaSelecionada para selectedParking em ReservaForm.jsx
 
 ## [0.1.0] - 2026-06-10
 
