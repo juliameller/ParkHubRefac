@@ -1,7 +1,8 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useReservaContext } from '../../context/ReservaContext';
-import { STORAGE_KEYS, BASE_DATE_FOR_TIME_CALC } from '../../constants';
+import { STORAGE_KEYS } from '../../constants';
+import { calcularValorTotal } from '../../utils/reservationUtils';
 
 const ReservaForm = ({ reserva, onChange }) => {
   const [vagaSelecionada, setVagaSelecionada] = useState(null);
@@ -27,31 +28,13 @@ const ReservaForm = ({ reserva, onChange }) => {
     }
   };
 
-  const calcularValorTotal = () => {
-    const horaEntrada = new Date(
-      `${BASE_DATE_FOR_TIME_CALC}${reserva.horaEntrada}`
+  const handleCalcularValorTotal = () => {
+    const valorFormatado = calcularValorTotal(
+      reserva.horaEntrada,
+      reserva.horaSaida,
+      vagaSelecionada.valorhora
     );
-    const horaSaida = new Date(
-      `${BASE_DATE_FOR_TIME_CALC}${reserva.horaSaida}`
-    );
-
-    // Calcula a diferença em milissegundos
-    const diferencaEmMilissegundos = horaSaida - horaEntrada;
-
-    // Converte a diferença para horas
-    const diferencaEmHoras = diferencaEmMilissegundos / (1000 * 60 * 60);
-
-    // Calcula o valor total multiplicando as horas pela taxa (8 pré-definida)
-    const valorTotal = diferencaEmHoras * parseFloat(vagaSelecionada.valorhora);
-
-    // Formata o valor total para Reais
-    const valorTotalFormatado = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(valorTotal);
-
-    // Atualiza o estado da reserva com o valor total
-    onChange('valorTotal', valorTotalFormatado);
+    onChange('valorTotal', valorFormatado);
   };
 
   const handleEnviarReserva = () => {
@@ -162,7 +145,7 @@ const ReservaForm = ({ reserva, onChange }) => {
             class="py-2 px-6 border border-[#e0e0e0]"
             value={reserva.horaEntrada}
             onChange={(e) => onChange('horaEntrada', e.target.value)}
-            onBlur={calcularValorTotal}
+            onBlur={handleCalcularValorTotal}
           />
           <label htmlfor="time" class="block text-base font-medium">
             Hora de saída:
@@ -174,7 +157,7 @@ const ReservaForm = ({ reserva, onChange }) => {
             class="py-2 px-6 border border-[#e0e0e0]"
             value={reserva.horaSaida}
             onChange={(e) => onChange('horaSaida', e.target.value)}
-            onBlur={calcularValorTotal}
+            onBlur={handleCalcularValorTotal}
           />
         </div>
         <div>

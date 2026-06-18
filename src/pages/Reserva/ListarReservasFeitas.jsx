@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useReservaContext } from '../../context/ReservaContext';
-import { STORAGE_KEYS, BASE_DATE_FOR_TIME_CALC } from '../../constants';
+import { STORAGE_KEYS } from '../../constants';
+import { calcularValorTotal } from '../../utils/reservationUtils';
 
 const ListarReservasFeitas = ({ reservas, ...props }) => {
   const [vagaSelecionada, setVagaSelecionada] = useState(null);
@@ -18,26 +19,13 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
     }
   }, []);
 
-  const calcularValorTotal = (horaEntrada, novaHoraSaida) => {
-    const horaEntradaDate = new Date(
-      `${BASE_DATE_FOR_TIME_CALC}${horaEntrada}`
+  const handleCalcularValorTotal = () => {
+    const valorFormatado = calcularValorTotal(
+      reserva.horaEntrada,
+      reserva.horaSaida,
+      vagaSelecionada.valorhora
     );
-    const horaSaidaDate = new Date(
-      `${BASE_DATE_FOR_TIME_CALC}${novaHoraSaida}`
-    );
-
-    const diferencaEmMilissegundos = horaSaidaDate - horaEntradaDate;
-
-    const diferencaEmHoras = diferencaEmMilissegundos / (1000 * 60 * 60);
-
-    const valorTotal = diferencaEmHoras * parseFloat(vagaSelecionada.valorhora);
-
-    const valorTotalFormatado = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(valorTotal);
-
-    return valorTotalFormatado;
+    onChange('valorTotal', valorFormatado);
   };
 
   const handleSalvarEdicao = (id, novaHoraSaida) => {
@@ -45,7 +33,8 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
     if (reserva) {
       const novoValorTotal = calcularValorTotal(
         reserva.horaEntrada,
-        novaHoraSaida
+        novaHoraSaida,
+        vagaSelecionada.valorhora
       );
       editarReserva(id, {
         horaSaida: novaHoraSaida,

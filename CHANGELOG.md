@@ -8,6 +8,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 
 - Configuração do Prettier com integração ao ESLint
 - Configuração do VS Code para formatação automática ao salvar
+- Arquivo src/utils/reservationUtils.js criado com a função calcularValorTotal
 
 ### Removed
 
@@ -24,6 +25,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 - Magic strings substituídas por constantes no Estacionamentos.jsx
 - Magic strings substituídas por constantes no App.jsx
 - Magic strings substituídas por constantes no Profile.jsx
+- calcularValorTotal removida de ReservaForm.jsx e ListarReservasFeitas.jsx, agora importada de reservationUtils.js
 
 ## [0.1.0] - 2026-06-10
 
