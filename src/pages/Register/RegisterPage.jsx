@@ -108,7 +108,7 @@ function Register({ onRegister }) {
   const navigate = useNavigate();
   
 
-  function handleregister() {
+  function handleRegister() {
     if (
       name === '' ||
       (loginType === 'user' && username === '') ||
@@ -137,9 +137,9 @@ function Register({ onRegister }) {
   }
 
   return (
-    <>
+    
       <div style={containerStyle}>
-        <img width="150" height="150" src={logoSVGneon} />
+        <img width="150" height="150" src={logoSVGneon} alt="logo" />
         <span style={parkhubStyle}>ParkHub</span>
         <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '30px', borderRadius: '20px', boxShadow: '0px 0px 7px 1px var(--azulclaroapp)' }}>
           <div style={{ backgroundColor: 'transparent', borderRadius: '10px', padding: '6px' }}>
@@ -219,14 +219,14 @@ function Register({ onRegister }) {
             </div>
             <div>
             </div>
-            <button type= 'button' to='./login' onClick={handleregister} style={buttonStyle} onMouseEnter={handleMouseEnter}
+            <button type= 'button' to='./login' onClick={handleRegister} style={buttonStyle} onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
               Cadastrar
             </button>
           </div>
         </div>
       </div>
-    </>
+    
   );
 }
 
