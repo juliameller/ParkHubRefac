@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import ReservaForm from './ReservaForm';
 
 const ReservaEstacionamento = () => {
@@ -14,8 +14,8 @@ const ReservaEstacionamento = () => {
     valorTotal: '',
   });
 
-  const handleReservaChange = (campo, valor) => {
-    setReserva({ ...reserva, [campo]: valor });
+  const handleReservaChange = (field, value) => {
+    setReserva({ ...reserva, [field]: value });
   };
 
   return (

@@ -29,6 +29,8 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 - Função handleregister renomeada para handleRegister no RegisterPage.jsx
 - Varíavel items renomeada para parkingLots no Estacionamentos.jsx
 - Varíavel items renomeada para parkingLots no EstacionamentoLanding.jsx
+- Parâmetros campo e valor renomeados para field e value no 
+ReservaEstacionamento.jsx
 
 ## [0.1.0] - 2026-06-10
 
