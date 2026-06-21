@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+
+import { useState, useEffect } from 'react';
 import { useReservaContext } from '../../context/ReservaContext';
 import { STORAGE_KEYS } from '../../constants';
 import { calcularValorTotal } from '../../utils/reservationUtils';
 
-const ListarReservasFeitas = ({ reservas, ...props }) => {
-  const [vagaSelecionada, setVagaSelecionada] = useState(null);
-  const { listarReservas, editarReserva, excluirReserva } = useReservaContext();
+const ListarReservasFeitas = () => {
+  const [selectedParking, setSelectedParking] = useState(null);
+  const { reservationList, editarReserva, excluirReserva } = useReservaContext();
   const [edicao, setEdicao] = useState(null);
 
   const handleEditar = (id) => {
@@ -15,26 +16,17 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
   useEffect(() => {
     const storedVaga = localStorage.getItem(STORAGE_KEYS.SELECTED_PARKING);
     if (storedVaga) {
-      setVagaSelecionada(JSON.parse(storedVaga));
+      setSelectedParking(JSON.parse(storedVaga));
     }
   }, []);
 
-  const handleCalcularValorTotal = () => {
-    const valorFormatado = calcularValorTotal(
-      reserva.horaEntrada,
-      reserva.horaSaida,
-      vagaSelecionada.valorhora
-    );
-    onChange('valorTotal', valorFormatado);
-  };
-
   const handleSalvarEdicao = (id, novaHoraSaida) => {
-    const reserva = listarReservas.find((reserva) => reserva.id === id);
+    const reserva = reservationList.find((r) => r.id === id);
     if (reserva) {
       const novoValorTotal = calcularValorTotal(
         reserva.horaEntrada,
         novaHoraSaida,
-        vagaSelecionada.valorhora
+        selectedParking.valorhora
       );
       editarReserva(id, {
         horaSaida: novaHoraSaida,
@@ -60,7 +52,7 @@ const ListarReservasFeitas = ({ reservas, ...props }) => {
       <h2 className="text-2xl font-bold mb-4" style={{ textAlign: 'center' }}>
         Reservas Feitas:
       </h2>
-      {listarReservas.map((reserva) => (
+      {reservationList.map((reserva) => (
         <div
           key={reserva.id}
           className="mb-6 p-4 border border-gray-300 rounded"
