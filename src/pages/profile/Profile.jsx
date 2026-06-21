@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { STORAGE_KEYS } from '../../constants';
+import PropTypes from 'prop-types';
 
 function ProfilePage({ userData, onDeleteData }) {
   const [editing, setEditing] = useState(false);
@@ -141,5 +142,16 @@ function ProfilePage({ userData, onDeleteData }) {
     </div>
   );
 }
+
+ProfilePage.propTypes = {
+  userData: PropTypes.shape({
+    name: PropTypes.string,
+    username: PropTypes.string,
+    CPF: PropTypes.string,
+    email: PropTypes.string,
+    password: PropTypes.string,
+  }).isRequired,
+  onDeleteData: PropTypes.func.isRequired,
+};
 
 export default ProfilePage;

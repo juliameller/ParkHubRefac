@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import vagasData from './Empresas.json';
 import Card from '@mui/material/Card';

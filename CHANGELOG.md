@@ -10,7 +10,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 - Configuração do VS Code para formatação automática ao salvar
 - Arquivo src/utils/reservationUtils.js criado com a função calcularValorTotal
 - Hook useReservationForm criado para encapsular o estado e lógica do formulário
-de reserva
+  de reserva
 
 ### Removed
 
@@ -31,15 +31,24 @@ de reserva
 - Função handleregister renomeada para handleRegister no RegisterPage.jsx
 - Varíavel items renomeada para parkingLots no Estacionamentos.jsx
 - Varíavel items renomeada para parkingLots no EstacionamentoLanding.jsx
-- Parâmetros campo e valor renomeados para field e value no 
-ReservaEstacionamento.jsx
-- Renomear vagaSelecionada para selectedParking em ReservaForm.jsx e 
-ListarReservasFeitas.jsx
+- Parâmetros campo e valor renomeados para field e value no
+  ReservaEstacionamento.jsx
+- Renomear vagaSelecionada para selectedParking em ReservaForm.jsx e
+  ListarReservasFeitas.jsx
 - Varíavel listarReservas renomeada para reservationList no ReservaContext.js
 - ReservaForm.jsx simplificado para componente de apresentação, usando useReservationForm
 - ReservaEstacionamento.jsx simplificado, removido estado de reserva redundante
 - Corrigidos atributos class/htmlfor para className/htmlFor no ReservaForm.jsx
 
+### Fixed
+
+- Imports não utilizados de React removidos em TopBar, ErrorPage, Estacionamentos, EstacionamentoLanding, Landing, TopBarLanding, Login, RegisterPage e Profile
+- Import não utilizado de useContext removido em TopBar.jsx
+- Import não utilizado de ReservaEstacionamento removido em TopBarLanding.jsx
+- Setter setCNPJ não utilizado removido em RegisterPage.jsx
+- Aspas no texto de Landing.jsx escapadas como entidade HTML
+- Caminho de importação de logo corrigido em Landing.jsx
+- PropTypes adicionados em RegisterPage.jsx e Profile.jsx
 
 ## [0.1.0] - 2026-06-10
 
