@@ -1,69 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useReservaContext } from '../../context/ReservaContext';
-import { STORAGE_KEYS } from '../../constants';
-import { calcularValorTotal } from '../../utils/reservationUtils';
+import { useReservationForm } from '../../hooks/useReservationForm';
 
-const ReservaForm = ({ reserva, onChange }) => {
-  const [selectedParking, setSelectedParking] = useState(null);
-  const [vagasDisponiveis, setVagasDisponiveis] = useState(0);
-
-  const { adicionarReserva } = useReservaContext();
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Recupera a vaga selecionada do localStorage ao montar o componente
-    const storedVaga = localStorage.getItem(STORAGE_KEYS.SELECTED_PARKING);
-    if (storedVaga) {
-      const parsedVaga = JSON.parse(storedVaga);
-      setSelectedParking(parsedVaga);
-      setVagasDisponiveis(parsedVaga.vagasdisponiveis);
-    }
-  }, []);
-
-  const decrementarVagasDisponiveis = () => {
-    if (vagasDisponiveis > 0) {
-      setVagasDisponiveis(vagasDisponiveis - 1);
-    }
-  };
-
-  const handleCalcularValorTotal = () => {
-    const valorFormatado = calcularValorTotal(
-      reserva.horaEntrada,
-      reserva.horaSaida,
-      selectedParking.valorhora
-    );
-    onChange('valorTotal', valorFormatado);
-  };
-
-  const handleEnviarReserva = () => {
-    // Verifica se há vagas disponíveis antes de fazer a reserva
-    if (vagasDisponiveis > 0) {
-      decrementarVagasDisponiveis();
-      const novaReserva = {
-        id: new Date().getTime(),
-        nome: reserva.nome,
-        placa: reserva.placa,
-        email: reserva.email,
-        data: reserva.data,
-        horaEntrada: reserva.horaEntrada,
-        horaSaida: reserva.horaSaida,
-        valorTotal: reserva.valorTotal,
-      };
-      adicionarReserva(novaReserva);
-      navigate('/ListarReservasFeitas', {
-        state: { valorTotal: reserva.valorTotal },
-      });
-    } else {
-      alert('Não há mais vagas disponíveis!');
-    }
-  };
+const ReservaForm = () => {
+  const {
+    reserva,
+    selectedParking,
+    vagasDisponiveis,
+    handleChange,
+    handleCalcularValorTotal,
+    handleEnviarReserva,
+  } = useReservationForm();
 
   return (
     <div className="p-2" style={{ border: '10px solid var(--azulclaroapp)' }}>
       <form>
-        <div class="mb-3">
+        <div className="mb-3">
           <div className="mb-4 rounded bg-gray-200 p-2 shadow">
             <p className="mb-3 text-xl font-bold">
               Reservas disponíveis: {vagasDisponiveis} reservas
@@ -80,7 +30,7 @@ const ReservaForm = ({ reserva, onChange }) => {
               <p>Nenhuma vaga selecionada</p>
             )}
           </div>
-          <label htmlfor="name" class="mb-2 block text-base font-medium">
+          <label htmlFor="name" className="mb-2 block text-base font-medium">
             Seu nome
           </label>
           <input
@@ -88,13 +38,13 @@ const ReservaForm = ({ reserva, onChange }) => {
             name="name"
             type="text"
             placeholder="Digite seu nome"
-            class="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             value={reserva.nome}
-            onChange={(e) => onChange('nome', e.target.value)}
+            onChange={(e) => handleChange('nome', e.target.value)}
           />
         </div>
-        <div class="mb-3">
-          <label htmlforfor="placa" class="mb-2 block text-base font-medium">
+        <div className="mb-3">
+          <label htmlFor="placa" className="mb-2 block text-base font-medium">
             Sua placa
           </label>
           <input
@@ -102,13 +52,13 @@ const ReservaForm = ({ reserva, onChange }) => {
             name="placa"
             type="text"
             placeholder="Digite sua placa"
-            class="rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+            className="rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             value={reserva.placa}
-            onChange={(e) => onChange('placa', e.target.value)}
+            onChange={(e) => handleChange('placa', e.target.value)}
           />
         </div>
         <div>
-          <label htmlfor="email" class="mb-2 block text-base font-medium">
+          <label htmlFor="email" className="mb-2 block text-base font-medium">
             Seu E-mail
           </label>
           <input
@@ -116,47 +66,46 @@ const ReservaForm = ({ reserva, onChange }) => {
             type="email"
             name="email"
             placeholder="Digite seu E-mail"
-            class="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             value={reserva.email}
-            onChange={(e) => onChange('email', e.target.value)}
+            onChange={(e) => handleChange('email', e.target.value)}
           />
         </div>
         <div>
-          <label htmlfor="data" class="block text-base font-medium">
+          <label htmlFor="data" className="block text-base font-medium">
             Data:
           </label>
           <input
             id="data"
             type="date"
-            data="data"
-            class="py-2 px-6 border border-[#e0e0e0]"
+            className="py-2 px-6 border border-[#e0e0e0]"
             value={reserva.data}
-            onChange={(e) => onChange('data', e.target.value)}
+            onChange={(e) => handleChange('data', e.target.value)}
           />
         </div>
         <div>
-          <label htmlfor="time" class="block text-base font-medium">
+          <label htmlFor="timeStart" className="block text-base font-medium">
             Hora de entrada:
           </label>
           <input
             id="timeStart"
             name="time"
             type="time"
-            class="py-2 px-6 border border-[#e0e0e0]"
+            className="py-2 px-6 border border-[#e0e0e0]"
             value={reserva.horaEntrada}
-            onChange={(e) => onChange('horaEntrada', e.target.value)}
+            onChange={(e) => handleChange('horaEntrada', e.target.value)}
             onBlur={handleCalcularValorTotal}
           />
-          <label htmlfor="time" class="block text-base font-medium">
+          <label htmlFor="timeEnding" className="block text-base font-medium">
             Hora de saída:
           </label>
           <input
             id="timeEnding"
             type="time"
             name="time"
-            class="py-2 px-6 border border-[#e0e0e0]"
+            className="py-2 px-6 border border-[#e0e0e0]"
             value={reserva.horaSaida}
-            onChange={(e) => onChange('horaSaida', e.target.value)}
+            onChange={(e) => handleChange('horaSaida', e.target.value)}
             onBlur={handleCalcularValorTotal}
           />
         </div>
@@ -173,7 +122,7 @@ const ReservaForm = ({ reserva, onChange }) => {
             readOnly
           />
           <button
-            type="submit"
+            type="button"
             className="bg-[#0335fc] text-white py-2 px-4 rounded mt-4"
             onClick={handleEnviarReserva}
           >
@@ -186,3 +135,4 @@ const ReservaForm = ({ reserva, onChange }) => {
 };
 
 export default ReservaForm;
+

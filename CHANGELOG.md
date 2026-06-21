@@ -9,6 +9,8 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 - Configuração do Prettier com integração ao ESLint
 - Configuração do VS Code para formatação automática ao salvar
 - Arquivo src/utils/reservationUtils.js criado com a função calcularValorTotal
+- Hook useReservationForm criado para encapsular o estado e lógica do formulário
+de reserva
 
 ### Removed
 
@@ -34,6 +36,10 @@ ReservaEstacionamento.jsx
 - Renomear vagaSelecionada para selectedParking em ReservaForm.jsx e 
 ListarReservasFeitas.jsx
 - Varíavel listarReservas renomeada para reservationList no ReservaContext.js
+- ReservaForm.jsx simplificado para componente de apresentação, usando useReservationForm
+- ReservaEstacionamento.jsx simplificado, removido estado de reserva redundante
+- Corrigidos atributos class/htmlfor para className/htmlFor no ReservaForm.jsx
+
 
 ## [0.1.0] - 2026-06-10
 
