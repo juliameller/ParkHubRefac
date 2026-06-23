@@ -1,8 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import { useReservaContext } from '../../context/ReservaContext';
-import { STORAGE_KEYS } from '../../constants';
 import { calcularValorTotal } from '../../utils/reservationUtils';
+import { getSelectedParking } from '../../services/storageService';
+
 
 const ListarReservasFeitas = () => {
   const [selectedParking, setSelectedParking] = useState(null);
@@ -14,10 +15,7 @@ const ListarReservasFeitas = () => {
   };
 
   useEffect(() => {
-    const storedVaga = localStorage.getItem(STORAGE_KEYS.SELECTED_PARKING);
-    if (storedVaga) {
-      setSelectedParking(JSON.parse(storedVaga));
-    }
+    setSelectedParking(getSelectedParking());
   }, []);
 
   const handleSalvarEdicao = (id, novaHoraSaida) => {

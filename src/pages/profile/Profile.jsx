@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { STORAGE_KEYS } from '../../constants';
 import PropTypes from 'prop-types';
+import { setUserData } from '../../services/storageService';
 
 function ProfilePage({ userData, onDeleteData }) {
   const [editing, setEditing] = useState(false);
@@ -21,9 +21,8 @@ function ProfilePage({ userData, onDeleteData }) {
   };
 
   const handleSaveChanges = () => {
-    localStorage.setItem(STORAGE_KEYS.USER_DATA, JSON.stringify(editedData));
+    setUserData(editedData);
     setEditing(false);
-    userData(editedData);
   };
 
   const handleDeleteAndNavigate = () => {

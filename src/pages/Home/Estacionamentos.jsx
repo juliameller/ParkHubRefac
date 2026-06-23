@@ -4,7 +4,7 @@ import vagasData from './Empresas.json';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import { STORAGE_KEYS } from '../../constants';
+import { setSelectedParking } from '../../services/storageService';
 
 export default function DetalheVaga() {
   const [parkingLots] = useState(vagasData);
@@ -33,7 +33,7 @@ export default function DetalheVaga() {
   };
 
   const handleReservarClick = (vaga) => {
-    localStorage.setItem(STORAGE_KEYS.SELECTED_PARKING, JSON.stringify(vaga));
+    setSelectedParking(vaga);
   };
 
   return (
