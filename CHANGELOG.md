@@ -11,6 +11,7 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 * Arquivo src/utils/reservationUtils.js criado com a função calcularValorTotal
 * Hook useReservationForm criado para encapsular o estado e lógica do formulário
   de reserva
+* Arquivo src/services/storageService.js criado para centralizar o acesso ao localStorage
 
 ### Removed
 
@@ -37,6 +38,9 @@ Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 * ReservaForm.jsx simplificado para componente de apresentação, utilizando o hook useReservationForm
 * ReservaEstacionamento.jsx simplificado, removido estado de reserva redundante
 * Corrigidos atributos class/htmlfor para className/htmlFor no ReservaForm.jsx
+* Acessos diretos ao localStorage centralizados em storageService.js
+* Criado serviço de armazenamento para encapsular operações de leitura e escrita de dados persistidos
+* Componentes App, Estacionamentos, Profile e ListarReservasFeitas refatorados para utilizar storageService.js em vez de acessar localStorage diretamente
 
 ### Fixed
 
